@@ -3,10 +3,15 @@ from selenium import webdriver
 
 
 #запуск браузера
-@pytest.fixture
-def driver():
-    driver = webdriver.Firefox()
+@pytest.fixture(scope='function', params=['firefox', 'chrome'])
+def browser(request):
+    browser = None
 
-    yield driver
+    if request.param == 'firefox':
+        browser = webdriver.Firefox()
+    elif request.param == 'chrome':
+        browser = webdriver.Chrome()
 
-    driver.quit()
+    yield browser
+
+    browser.quit()
