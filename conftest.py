@@ -4,14 +4,14 @@ from selenium import webdriver
 
 #запуск браузера
 @pytest.fixture(scope='function', params=['firefox', 'chrome'])
-def browser(request):
-    browser = None
+def driver(request):
+    driver = None
 
     if request.param == 'firefox':
-        browser = webdriver.Firefox()
+        driver = webdriver.Firefox()
     elif request.param == 'chrome':
-        browser = webdriver.Chrome()
+        driver = webdriver.Chrome()
 
-    yield browser
+    yield driver
 
-    browser.quit()
+    driver.quit()
