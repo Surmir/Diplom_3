@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class LoginPageLocators():
     #заголовок страницы авторизации
-    LOGIN_PAGE = (By.XPATH, ".//h2[text()='Вход']")
+    LOGIN_PAGE_HEADER = (By.XPATH, ".//h2[text()='Вход']")
     #поле email
     FIELD_EMAIL = (By.XPATH, ".//input[@name='name']")
     #поле пароль
