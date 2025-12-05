@@ -19,6 +19,12 @@ class MainPage(BasePage):
     def click_button_feed(self):
         self.click_on_element(BPLocs.HEADER_BUTTON_FEED)
 
+    @allure.step('Проверяем переход на страницу "Лента Заказов"')
+    def check_open_feed_page(self):
+        actual_url = self.get_page_url()
+        expect_url = Url.FEED_PAGE
+        return actual_url == expect_url
+
     @allure.step('Нажимаем на ингредиент')
     def click_ingredient(self):
         self.click_on_element(MPLocs.INGREDIENT)
