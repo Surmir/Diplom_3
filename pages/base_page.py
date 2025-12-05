@@ -26,11 +26,6 @@ class BasePage():
         element = WebDriverWait(self.driver, 2).until(EC.element_to_be_clickable(element))
         element.click()
 
-    @allure.step('Прокручиваем до элемента страницы')
-    def skroll_to_element(self, element):
-        element = self.driver.find_element(*element)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-
     @allure.step('Получаем текст элемента')
     def get_text(self, element):
         return self.driver.find_element(*element).text
