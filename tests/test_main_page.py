@@ -21,24 +21,24 @@ class TestMainPage():
 
     @allure.title('Появление всплывающего окна "Детали ингредиента"')
     @allure.description('При клике на ингредиент, появляется всплывающее окно "Детали ингредиента"')
-    def test_click_ingred_open_window_order_details(self, driver):
+    def test_click_ingred_open_window_ingred_details(self, driver):
         m_page = MainPage(driver)
         
         m_page.click_ingredient()
-        m_page.wait_load_window_order_details()
+        m_page.wait_load_window_ingred_details()
 
-        assert m_page.check_open_window_order_details()
+        assert m_page.check_open_window_ingred_details()
 
     @allure.title('Закрытие всплывающего окна "Детали ингредиента"')
     @allure.description('При клике по крестику, закрывается всплывающее окно "Детали ингредиента"')
-    def test_button_x_close_window_order_details(self, driver):
+    def test_button_x_close_window_ingred_details(self, driver):
         m_page = MainPage(driver)
         
         m_page.click_ingredient()
-        m_page.wait_load_window_order_details()
+        m_page.wait_load_window_ingred_details()
         m_page.click_button_x()
 
-        assert m_page.check_open_window_order_details() == False
+        assert m_page.check_open_window_ingred_details() == False
 
     @allure.title('Увеличение счётчика ингредиента')
     @allure.description('При добавлении ингредиента в заказ счётчик этого ингредиента увеличивается')
