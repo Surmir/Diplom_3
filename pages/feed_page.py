@@ -27,11 +27,13 @@ class FeedPage(BasePage):
     
     @allure.step('Проверяем счетчик «Выполнено за всё время»')
     def check_counter_completed_all_time(self):
-        return self.get_text(FPLocs.COUNTER_COMPLETED_ALL_TIME)
+        count = self.get_text(FPLocs.COUNTER_COMPLETED_ALL_TIME)
+        return int(count)
     
     @allure.step('Проверяем счетчик «Выполнено за сегодня»')
     def check_counter_completed_today(self):
-        return self.get_text(FPLocs.COUNTER_COMPLETED_TODAY)
+        count = self.get_text(FPLocs.COUNTER_COMPLETED_TODAY)
+        return int(count)
     
     @allure.step('Проверяем раздел «В работе»')
     def check_section_in_work(self):
