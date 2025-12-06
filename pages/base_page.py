@@ -28,7 +28,7 @@ class BasePage():
     @allure.step('Нажимаем на элемент страницы')
     def click_on_element(self, element):
         element = WebDriverWait(self.driver, 2).until(EC.element_to_be_clickable(element))
-        element.click()
+        self.driver.execute_script("arguments[0].click();", element)
 
     @allure.step('Получаем текст элемента')
     def get_text(self, element):
