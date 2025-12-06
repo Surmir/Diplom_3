@@ -11,8 +11,8 @@ class LoginPage(BasePage):
         self.go_to_page(Url.LOGIN_PAGE)
 
     @allure.step('Ожидание загрузки страницы авторизации')
-    def wait_load_login_page(self):
-        self.wait_for_visibility_element(LPLocs.LOGIN_PAGE_HEADER)
+    def wait_load_login_page(self, time=5):
+        self.wait_for_visibility_element(LPLocs.LOGIN_PAGE_HEADER, time)
 
     @allure.step('Заполняем поле "Email"')
     def set_email_placeholder(self, email):

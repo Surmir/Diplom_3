@@ -12,8 +12,8 @@ class MainPage(BasePage):
         self.go_to_page(Url.MAIN_PAGE)
 
     @allure.step('Ожидание загрузки главной страницы')
-    def wait_load_main_page(self):
-        self.wait_for_visibility_element(MPLocs.MAIN_PAGE_HEADER)
+    def wait_load_main_page(self, time=5):
+        self.wait_for_visibility_element(MPLocs.MAIN_PAGE_HEADER, time)
 
     @allure.step('Нажимаем на кнопку "Лента Заказов" в шапке страницы')
     def click_button_feed(self):

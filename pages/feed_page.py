@@ -12,8 +12,8 @@ class FeedPage(BasePage):
         self.go_to_page(Url.FEED_PAGE)
 
     @allure.step('Ожидание загрузки страницы "Лента Заказов"')
-    def wait_load_feed_page(self):
-        self.wait_for_visibility_element(FPLocs.FEED_PAGE_HEADER)
+    def wait_load_feed_page(self, time=5):
+        self.wait_for_visibility_element(FPLocs.FEED_PAGE_HEADER, time)
 
     @allure.step('Нажимаем на кнопку "Конструктор" в шапке страницы')
     def click_button_builder(self):
