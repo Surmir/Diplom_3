@@ -21,6 +21,10 @@ class BasePage():
     def wait_for_visibility_element(self, element, wait_time=5):
         WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(element))
 
+    @allure.step('Проверяем появление элемента страницы на экране')
+    def check_element_is_displayed(self, element, wait_time=1):
+        return self.wait_for_visibility_element(element, wait_time).is_displayed
+
     @allure.step('Нажимаем на элемент страницы')
     def click_on_element(self, element):
         element = WebDriverWait(self.driver, 2).until(EC.element_to_be_clickable(element))
