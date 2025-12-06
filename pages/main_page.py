@@ -30,11 +30,11 @@ class MainPage(BasePage):
         self.click_on_element(MPLocs.INGREDIENT)
 
     @allure.step('Ожидаем появления окна "Детали ингредиента"')
-    def wait_load_window_order_details(self):
+    def wait_load_window_ingred_details(self):
         self.wait_for_visibility_element(MPLocs.WINDOW_INGR_DETAILS)
 
     @allure.step('Проверяем появление окна "Детали ингредиента"')
-    def check_open_window_order_details(self):
+    def check_open_window_ingred_details(self):
         return self.check_element_is_displayed(MPLocs.WINDOW_INGR_DETAILS)
 
     @allure.step('Нажимаем на кнопку "Х" в окне "Детали ингредиента"')
@@ -61,3 +61,8 @@ class MainPage(BasePage):
     @allure.step('Получаем id заказа')
     def get_id_order(self):
         return self.get_text(MPLocs.ID_ORDER)
+    
+    @allure.step('Создаем заказ')
+    def create_order(self):
+        self.add_ingredient_to_order()
+        self.click_button_create_order()
