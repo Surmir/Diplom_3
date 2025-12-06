@@ -33,6 +33,10 @@ class MainPage(BasePage):
     def wait_load_window_order_details(self):
         self.wait_for_visibility_element(MPLocs.WINDOW_INGR_DETAILS)
 
+    @allure.step('Проверяем появление окна "Детали ингредиента"')
+    def check_open_window_order_details(self):
+        return self.check_element_is_displayed(MPLocs.WINDOW_INGR_DETAILS)
+
     @allure.step('Нажимаем на кнопку "Х" в окне "Детали ингредиента"')
     def click_button_x(self):
         self.click_on_element(MPLocs.BUTTON_CLOSE_X)
