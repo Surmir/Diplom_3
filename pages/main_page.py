@@ -47,7 +47,8 @@ class MainPage(BasePage):
 
     @allure.step('Проверяем счетчик ингредиента')
     def check_counter_ingredient(self):
-        return self.get_text(MPLocs.COUNTER_INGREDIENT)
+        count = self.get_text(MPLocs.COUNTER_INGREDIENT)
+        return int(count)
     
     @allure.step('Нажимаем на кнопку "Оформить заказ"')
     def click_button_create_order(self):
