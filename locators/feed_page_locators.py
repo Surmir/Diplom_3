@@ -9,4 +9,4 @@ class FeedPageLocators():
     #счетчик «Выполнено за сегодня»
     COUNTER_COMPLETED_TODAY = (By.XPATH, "(.//p[@class='OrderFeed_number__2MbrQ text text_type_digits-large'])[2]")
     #раздел «В работе»
-    SECTION_IN_WORK = (By.XPATH, ".//li[@class='text text_type_main-small']")
+    SECTION_IN_WORK = (By.XPATH, ".//li[@class='text text_type_digits-default mb-2']")
