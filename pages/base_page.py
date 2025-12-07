@@ -1,6 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+from seletools.actions import drag_and_drop
+from data import TestWaitTime as TWTime
 import allure
 
 
@@ -18,16 +19,21 @@ class BasePage():
         return self.driver.current_url
     
     @allure.step('Ожидаем видимости элемента страницы')
-    def wait_for_visibility_element(self, element, wait_time=5):
+    def wait_for_visibility_element(self, element, wait_time=TWTime.VISIBLE):
         WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(element))
 
-    @allure.step('Проверяем появление элемента страницы на экране')
-    def check_element_is_displayed(self, element, wait_time=1):
-        return self.wait_for_visibility_element(element, wait_time).is_displayed
+    @allure.step('Ожидаем появление элемента страницы на экране')
+    def check_element_is_displayed(self, element, wait_time=TWTime.VISIBLE):
+        wait_element = WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located(element))
+        return wait_element.is_displayed()
+    
+    @allure.step('Ожидаем исчезновение элемента страницы с экрана')
+    def check_element_not_is_displayed(self, element, wait_time=TWTime.INVISIBLE):
+        return WebDriverWait(self.driver, wait_time).until(EC.invisibility_of_element_located(element))    
 
     @allure.step('Нажимаем на элемент страницы')
     def click_on_element(self, element):
-        element = WebDriverWait(self.driver, 2).until(EC.element_to_be_clickable(element))
+        element = WebDriverWait(self.driver, TWTime.CLICKBLE).until(EC.element_to_be_clickable(element))
         self.driver.execute_script("arguments[0].click();", element)
 
     @allure.step('Получаем текст элемента')
@@ -40,7 +46,7 @@ class BasePage():
 
     @allure.step('Перетащить элемент на целевой элемент')
     def drag_and_drop_element(self, draggable_element, place_element):
-        actions = ActionChains(self.driver)
-        source_element = self.driver.find_element(*draggable_element)
-        target_element = self.driver.find_element(*place_element)
-        actions.drag_and_drop(source_element, target_element).perform()
+        source = self.driver.find_element(*draggable_element)
+        target = self.driver.find_element(*place_element)
+
+        drag_and_drop(self.driver, source, target)

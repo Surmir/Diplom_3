@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from locators.login_page_locators import LoginPageLocators as LPLocs
+from data import TestWaitTime as TWTime
 from urls import Url
 import allure
 
@@ -11,8 +12,8 @@ class LoginPage(BasePage):
         self.go_to_page(Url.LOGIN_PAGE)
 
     @allure.step('Ожидание загрузки страницы авторизации')
-    def wait_load_login_page(self, time=5):
-        self.wait_for_visibility_element(LPLocs.LOGIN_PAGE_HEADER, time)
+    def wait_load_login_page(self, wait_time=TWTime.PAGE):
+        self.wait_for_visibility_element(LPLocs.LOGIN_PAGE_HEADER, wait_time)
 
     @allure.step('Заполняем поле "Email"')
     def set_email_placeholder(self, email):
@@ -29,9 +30,9 @@ class LoginPage(BasePage):
     @allure.step('Авторизация пользователя')
     @allure.description('Переход на страницу авторизации с ожиданием её загрузки, ' \
     'и авторизация пользователя')
-    def user_login(self, email, password):
+    def user_login(self, email, password, wait_time=TWTime.PAGE):
         self.open_login_page()
-        self.wait_load_login_page()
+        self.wait_load_login_page(wait_time)
         self.set_email_placeholder(email)
         self.set_password_placeholder(password)
         self.click_button_enter()

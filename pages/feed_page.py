@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from locators.base_page_locators import BasePageLocators as BPLocs
 from locators.feed_page_locators import FeedPageLocators as FPLocs
+from data import TestWaitTime as TWTime
 from urls import Url
 import allure
 
@@ -12,8 +13,13 @@ class FeedPage(BasePage):
         self.go_to_page(Url.FEED_PAGE)
 
     @allure.step('Ожидание загрузки страницы "Лента Заказов"')
-    def wait_load_feed_page(self, time=5):
-        self.wait_for_visibility_element(FPLocs.FEED_PAGE_HEADER, time)
+    def wait_load_feed_page(self, wait_time=TWTime.PAGE):
+        self.wait_for_visibility_element(FPLocs.FEED_PAGE_HEADER, wait_time)
+
+    @allure.step('Открываем главную страницу и ожидаем её загрузки')
+    def wait_open_and_load_feed_page(self, wait_time=TWTime.PAGE):
+        self.open_feed_page()
+        self.wait_load_feed_page(wait_time)
 
     @allure.step('Нажимаем на кнопку "Конструктор" в шапке страницы')
     def click_button_builder(self):
@@ -37,4 +43,5 @@ class FeedPage(BasePage):
     
     @allure.step('Проверяем раздел «В работе»')
     def check_section_in_work(self):
-        return self.get_text(FPLocs.SECTION_IN_WORK)
+        text = self.get_text(FPLocs.SECTION_IN_WORK)
+        return text[1:]
