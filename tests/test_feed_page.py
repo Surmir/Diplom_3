@@ -12,10 +12,9 @@ class TestFeedPage():
         f_page = FeedPage(driver)
         m_page = MainPage(driver)
         
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(10)
         f_page.click_button_builder()
-        m_page.wait_load_main_page()
+        m_page.wait_load_main_page(10)
 
         assert  f_page.check_open_main_page()
 
@@ -25,17 +24,14 @@ class TestFeedPage():
         f_page = FeedPage(driver_with_auth)
         m_page = MainPage(driver_with_auth)
 
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(15)
         num_before = f_page.check_counter_completed_all_time()
 
-        m_page.open_main_page()
-        m_page.wait_load_main_page()
+        m_page.wait_open_and_load_main_page(7)
         m_page.create_order()
-        m_page.wait_load_window_order_details()
+        m_page.wait_load_window_order_details(10)
 
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(7)
         num_after = f_page.check_counter_completed_all_time()
 
         assert num_before < num_after
@@ -46,17 +42,14 @@ class TestFeedPage():
         f_page = FeedPage(driver_with_auth)
         m_page = MainPage(driver_with_auth)
 
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(15)
         num_before = f_page.check_counter_completed_today()
 
-        m_page.open_main_page()
-        m_page.wait_load_main_page()
+        m_page.wait_open_and_load_main_page(7)
         m_page.create_order()
-        m_page.wait_load_window_order_details()
+        m_page.wait_load_window_order_details(10)
 
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(7)
         num_after = f_page.check_counter_completed_today()
 
         assert num_before < num_after
@@ -67,14 +60,12 @@ class TestFeedPage():
         f_page = FeedPage(driver_with_auth)
         m_page = MainPage(driver_with_auth)
 
-        m_page.open_main_page()
-        m_page.wait_load_main_page()
         m_page.create_order()
-        m_page.wait_load_window_order_details()
+        m_page.wait_load_window_order_details(10)
+        m_page.wait_invisible_overlay()
         id_order = m_page.get_id_order()
 
-        f_page.open_feed_page()
-        f_page.wait_load_feed_page()
+        f_page.wait_open_and_load_feed_page(7)
         section_in_work = f_page.check_section_in_work()
 
         assert id_order == section_in_work
