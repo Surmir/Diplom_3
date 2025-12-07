@@ -20,35 +20,19 @@ def driver(request):
     driver.quit()
 
 #запуск браузера с переходом на главную страницу
-@pytest.fixture(scope='function', params=['firefox', 'chrome'])
-def driver_main_page(request):
-    driver = None
-
-    if request.param == 'firefox':
-        driver = webdriver.Firefox()
-    elif request.param == 'chrome':
-        driver = webdriver.Chrome()
-
+@pytest.fixture
+def driver_main_page(driver):
     m_page = MainPage(driver)
-    m_page.wait_load_main_page(7)
+    m_page.wait_open_and_load_main_page(20)
 
-    yield driver
-
-    driver.quit()
+    yield m_page
 
 #запуск браузера с авторизацией
-@pytest.fixture(scope='function', params=['firefox', 'chrome'])
-def driver_with_auth(request):
-    driver = None
-
-    if request.param == 'firefox':
-        driver = webdriver.Firefox()
-    elif request.param == 'chrome':
-        driver = webdriver.Chrome()
-
+@pytest.fixture
+def driver_with_auth(driver):
     l_page = LoginPage(driver)
-    l_page.user_login(ULData.EMAIL, ULData.PASSWORD)
+    m_page = MainPage(driver)
+    l_page.user_login(ULData.EMAIL, ULData.PASSWORD, 15)
+    m_page.wait_load_main_page(10)
 
     yield driver
-
-    driver.quit()
