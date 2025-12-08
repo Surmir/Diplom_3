@@ -25,7 +25,7 @@ def driver_main_page(driver):
     m_page = MainPage(driver)
     m_page.wait_open_and_load_main_page(20)
 
-    yield m_page
+    return m_page
 
 #запуск браузера с авторизацией
 @pytest.fixture
@@ -35,4 +35,4 @@ def driver_with_auth(driver):
     l_page.user_login(ULData.EMAIL, ULData.PASSWORD, 15)
     m_page.wait_load_main_page(10)
 
-    yield driver
+    return driver
